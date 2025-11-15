@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EchoNote — Speech to Text</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="speech.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">🎙️</div>
+      <div class="title">
+        <h1>EchoNote</h1>
+        <p>Speak naturally. Get clean text instantly.</p>
+      </div>
+    </div>
+    <nav class="actions">
+      <button id="toggle-theme" class="ghost-btn" aria-label="Toggle theme">Theme</button>
+      <a class="ghost-btn" href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank" rel="noopener">Privacy</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="panel controls-panel">
+      <div class="control-row">
+        <div class="select-wrap">
+          <label for="language"><span>Language</span></label>
+          <select id="language">
+            <option value="en-IN" selected>English (India)</option>
+            <option value="en-US">English (US)</option>
+            <option value="hi-IN">Hindi (India)</option>
+            <option value="mr-IN">Marathi (India)</option>
+            <option value="kn-IN">Kannada (India)</option>
+            <option value="te-IN">Telugu (India)</option>
+            <option value="ta-IN">Tamil (India)</option>
+            <option value="bn-IN">Bengali (India)</option>
+            <option value="gu-IN">Gujarati (India)</option>
+            <option value="pa-IN">Punjabi (India)</option>
+            <option value="ur-PK">Urdu</option>
+            <option value="fr-FR">French</option>
+            <option value="es-ES">Spanish</option>
+          </select>
+        </div>
+
+        <div class="switch-wrap">
+          <label class="switch">
+            <input type="checkbox" id="continuous" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="switch-label">Continuous</span>
+        </div>
+
+        <div class="switch-wrap">
+          <label class="switch">
+            <input type="checkbox" id="interim" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="switch-label">Interim</span>
+        </div>
+
+        <div class="switch-wrap">
+          <label class="switch">
+            <input type="checkbox" id="autoPunct" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="switch-label">Auto punctuation</span>
+        </div>
+      </div>
+
+      <div class="record-row">
+        <button id="startBtn" class="primary-btn">Start</button>
+        <button id="pauseBtn" class="warning-btn" disabled>Pause</button>
+        <button id="stopBtn" class="danger-btn" disabled>Stop</button>
+        <div class="status">
+          <span id="statusDot" class="dot"></span>
+          <span id="statusText">Idle</span>
+        </div>
+      </div>
+
+      <div class="visualizer" aria-hidden="true">
+        <canvas id="waveCanvas"></canvas>
+      </div>
+    </section>
+
+    <section class="panel transcript-panel">
+      <div class="panel-head">
+        <h2>Live transcript</h2>
+        <div class="panel-actions">
+          <button id="copyLive" class="ghost-btn">Copy</button>
+          <button id="clearLive" class="ghost-btn">Clear</button>
+        </div>
+      </div>
+      <div id="liveOutput" class="output" aria-live="polite"></div>
+    </section>
+
+    <section class="panel sessions-panel">
+      <div class="panel-head">
+        <h2>Session history</h2>
+        <div class="panel-actions">
+          <button id="mergeAll" class="ghost-btn">Merge all</button>
+          <button id="downloadTxt" class="ghost-btn">Download TXT</button>
+          <button id="downloadJson" class="ghost-btn">Download JSON</button>
+        </div>
+      </div>
+      <ul id="sessionList" class="session-list"></ul>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Built with the Web Speech API. Best in Chromium-based browsers.</p>
+    <p class="support-note" id="supportNote"></p>
+  </footer>
+
+  <script src="speech.js"></script>
+</body>
+</html>
